@@ -1,0 +1,1 @@
+<?php $_GET["module"]="potensi"; require __DIR__."/crud.php"; ?>

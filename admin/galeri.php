@@ -1,0 +1,1 @@
+<?php $_GET["module"]="galeri"; require __DIR__."/crud.php"; ?>

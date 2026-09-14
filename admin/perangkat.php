@@ -1,0 +1,1 @@
+<?php $_GET["module"]="perangkat"; require __DIR__."/crud.php"; ?>

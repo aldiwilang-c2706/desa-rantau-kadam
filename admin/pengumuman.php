@@ -1,0 +1,1 @@
+<?php $_GET["module"]="pengumuman"; require __DIR__."/crud.php"; ?>
