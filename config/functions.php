@@ -23,18 +23,44 @@ function unique_slug(string $title,int $exclude=0):string{
         $slug=$base.'-'.(++$i);
     }
 }
-function upload_file(array $f,string $type):?string{
-    if(($f['error']??UPLOAD_ERR_NO_FILE)===UPLOAD_ERR_NO_FILE)return null;
-    if(($f['error']??0)!==UPLOAD_ERR_OK)throw new RuntimeException('Upload gagal.');
-    $limit=$type==='image'?MAX_IMAGE_SIZE:MAX_PDF_SIZE;
-    if(($f['size']??0)>$limit)throw new RuntimeException('Ukuran file melebihi batas.');
-    $mime=(new finfo(FILEINFO_MIME_TYPE))->file($f['tmp_name']);
-    $allowed=$type==='image'?['image/jpeg'=>'jpg','image/png'=>'png']:['application/pdf'=>'pdf'];
-    if(!isset($allowed[$mime]))throw new RuntimeException($type==='image'?'Gambar harus JPG/PNG.':'File harus PDF.');
-    $folder=$type==='image'?'images':'docs'; $name=bin2hex(random_bytes(16)).'.'.$allowed[$mime];
-    $dir=__DIR__.'/../uploads/'.$folder; if(!is_dir($dir))mkdir($dir,0755,true);
-    if(!move_uploaded_file($f['tmp_name'],$dir.'/'.$name))throw new RuntimeException('File tidak dapat disimpan.');
-    return $folder.'/'.$name;
+const DOCX_MIME = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+function is_docx(string $path): bool {
+    if (!class_exists('ZipArchive')) return false;
+    $z = new ZipArchive();
+    if ($z->open($path) !== true) return false;
+    $ok = $z->locateName('[Content_Types].xml') !== false
+       && $z->locateName('word/document.xml') !== false
+       && $z->locateName('word/vbaProject.bin') === false; // tolak .docm bermakro
+    $z->close();
+    return $ok;
+}
+function upload_file(array $f, string $type): ?string {
+    if (($f['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) return null;
+    if (($f['error'] ?? 0) !== UPLOAD_ERR_OK) throw new RuntimeException('Upload gagal.');
+    $limit = $type === 'image' ? MAX_IMAGE_SIZE : MAX_PDF_SIZE;
+    if (($f['size'] ?? 0) > $limit) throw new RuntimeException('Ukuran file melebihi batas.');
+    $mime = (new finfo(FILEINFO_MIME_TYPE))->file($f['tmp_name']);
+
+    if ($type === 'image') {
+        $ext = ['image/jpeg' => 'jpg', 'image/png' => 'png'][$mime] ?? null;
+        $err = 'Gambar harus JPG/PNG.';
+    } elseif ($type === 'doc') {
+        $ext = $mime === 'application/pdf' ? 'pdf'
+             : (in_array($mime, [DOCX_MIME, 'application/zip', 'application/octet-stream'], true)
+                && is_docx($f['tmp_name']) ? 'docx' : null);
+        $err = 'File harus PDF atau DOCX.';
+    } else {
+        $ext = $mime === 'application/pdf' ? 'pdf' : null;
+        $err = 'File harus PDF.';
+    }
+    if ($ext === null) throw new RuntimeException($err);
+
+    $folder = $type === 'image' ? 'images' : 'docs';
+    $name = bin2hex(random_bytes(16)) . '.' . $ext;
+    $dir = __DIR__ . '/../uploads/' . $folder;
+    if (!is_dir($dir)) mkdir($dir, 0755, true);
+    if (!move_uploaded_file($f['tmp_name'], $dir . '/' . $name)) throw new RuntimeException('File tidak dapat disimpan.');
+    return $folder . '/' . $name;
 }
 function delete_upload(?string $path):void{
     if(!$path)return;

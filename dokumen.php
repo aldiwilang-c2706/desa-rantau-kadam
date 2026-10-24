@@ -24,11 +24,19 @@ $items = db()->query('SELECT * FROM dokumen_publik ORDER BY tanggal_upload DESC,
                 </thead>
                 <tbody>
                     <?php foreach ($items as $x): ?>
+                        <?php
+                        $ext = strtolower(pathinfo($x['file_path'], PATHINFO_EXTENSION));
+                        $url = BASE_URL . '/uploads/' . e($x['file_path']);
+                        ?>
                         <tr>
                             <td><?= e($x['judul_dokumen']) ?></td>
-                            <td><?= $x['tanggal_upload'] ?></td>
+                            <td><?= e($x['tanggal_upload']) ?></td>
                             <td>
-                                <a target="_blank" class="btn btn-sm btn-primary" href="<?= BASE_URL ?>/uploads/<?= e($x['file_path']) ?>">Lihat PDF</a>
+                                <?php if ($ext === 'docx'): ?>
+                                    <a class="btn btn-sm btn-outline-primary" href="<?= $url ?>" download>Unduh DOCX</a>
+                                <?php else: ?>
+                                    <a target="_blank" rel="noopener" class="btn btn-sm btn-primary" href="<?= $url ?>">Lihat PDF</a>
+                                <?php endif; ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

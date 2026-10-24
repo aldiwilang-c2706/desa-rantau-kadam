@@ -43,7 +43,7 @@ $config = [
         'table'  => 'dokumen_publik',
         'title'  => 'Dokumen Publik',
         'fields' => ['judul_dokumen', 'tanggal_upload'],
-        'pdf'    => 'file_path'
+        'pdf'    => 'file_path',
     ]
 ];
 
@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $file = upload_file($_FILES[$c['image']] ?? [], 'image');
             }
             if (isset($c['pdf'])) {
-                $file = upload_file($_FILES[$c['pdf']] ?? [], 'pdf');
+                $file = upload_file($_FILES[$c['pdf']] ?? [], $c['filetype'] ?? 'pdf');
             }
 
             if ($id) {
@@ -185,10 +185,10 @@ if ($action === 'form') {
                 </div>
             <?php endif; ?>
 
-            <?php if (isset($c['pdf'])): ?>
+            <?php if (isset($c['pdf'])): $isDoc = ($c['filetype'] ?? 'pdf') === 'doc'; ?>
                 <div class="col-md-6">
-                    <label class="form-label">PDF (maks. 5 MB)</label>
-                    <input class="form-control" type="file" name="<?= $c['pdf'] ?>" accept=".pdf">
+                    <label class="form-label"><?= $isDoc ? 'PDF atau DOCX (maks. 5 MB)' : 'PDF (maks. 5 MB)' ?></label>
+                    <input class="form-control" type="file" name="<?= $c['pdf'] ?>" accept="<?= $isDoc ? '.pdf,.docx' : '.pdf' ?>">
                 </div>
             <?php endif; ?>
 
