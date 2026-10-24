@@ -1,0 +1,7 @@
+# file hasil upload (jangan masuk repo), tapi pertahankan penanda folder dan .htaccess
+uploads/images/*
+uploads/docs/*
+!uploads/images/.gitkeep
+!uploads/images/.htaccess
+!uploads/docs/.gitkeep
+!uploads/docs/.htaccess
