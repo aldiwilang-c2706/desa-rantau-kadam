@@ -9,8 +9,3 @@ Fitur admin: Dashboard, CRUD Berita, Pengumuman, Galeri, Potensi Desa, Perangkat
 Keamanan: prepared statements, password_hash/password_verify, CSRF, session regeneration, XSS escaping, MIME validation upload, random filename, batas ukuran file, dan proteksi eksekusi PHP di uploads.
 
 Untuk instalasi lihat TUTORIAL.md.
- anjay mabar
- prikitiw
- aselole
- josjis
- adasjdasdasd
