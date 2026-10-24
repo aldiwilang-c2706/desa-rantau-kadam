@@ -13,3 +13,4 @@ Untuk instalasi lihat TUTORIAL.md.
  prikitiw
  aselole
  josjis
+ adasjdasdasd
