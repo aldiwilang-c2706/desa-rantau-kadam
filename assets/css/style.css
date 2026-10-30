@@ -36,8 +36,8 @@ a {
 
 .navbar-brand-mark {
     width: 48px;
-    height: 48px;
-    border: 2px solid var(--primary);
+    height: 50px;
+    border: none;
     border-radius: 12px;
     display: grid;
     place-items: center;
@@ -207,11 +207,22 @@ a {
     box-shadow: 0 20px 60px rgba(15, 23, 42, .12);
 }
 
+
 .login-visual {
-    background: linear-gradient(160deg, var(--dark), var(--primary));
-    color: #fff;
-    min-height: 520px;
+    background:
+        linear-gradient(
+            rgba(0, 40, 100, 0.55),
+            rgba(0, 40, 100, 0.55)
+        ),
+        url("../img/rantau_kadam.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    color: white;
 }
+
 
 @media (max-width: 991px) {
     .admin-sidebar {

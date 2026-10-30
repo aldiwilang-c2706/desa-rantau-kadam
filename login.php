@@ -49,7 +49,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
         <div class="col-lg-6 p-4 p-lg-5">
             <div class="text-center mb-4">
-                <div class="navbar-brand-mark mx-auto mb-3">RK</div>
+                <div class="navbar-brand-mark mx-auto mb-3">
+    <img src="<?= BASE_URL ?>/assets/img/logo.png"
+         alt="Logo Desa"
+         style="width: 116%; height: 110%; object-fit: contain;">
+</div>
                 <h2 class="h3 fw-bold">Login Admin</h2>
                 <p class="text-muted">Masuk ke sistem administrasi.</p>
             </div>
