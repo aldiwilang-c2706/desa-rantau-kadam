@@ -10,19 +10,18 @@ $g = $pdo->query('SELECT * FROM galeri ORDER BY tanggal_upload DESC, id DESC LIM
 ?>
 
 <main class="container py-4">
-    <section class="hero p-4 p-lg-5 mb-5">
-        <div class="hero-content row align-items-center">
-            <div class="col-lg-8">
-                <span class="badge bg-light text-primary mb-3">WEBSITE RESMI DESA</span>
-                <h1 class="display-5 fw-bold">Selamat Datang di Desa Rantau Kadam</h1>
-                <p class="lead opacity-75">Pusat informasi, pelayanan, dan transparansi Pemerintah Desa Rantau Kadam.</p>
-                <a href="<?= BASE_URL ?>/profil.php" class="btn btn-light text-primary fw-semibold">Jelajahi Profil Desa →</a>
-            </div>
-            <div class="col-lg-4 text-center d-none d-lg-block">
-                <i class="bi bi-buildings" style="font-size: 9rem; opacity: .2"></i>
-            </div>
-        </div>
-    </section>
+  <section class="hero p-4 p-lg-5 mb-5">
+      <div class="hero-content row align-items-center">
+          <div class="col-lg-5 ms-lg-auto">
+              <div class="hero-glass">
+                  <span class="badge bg-primary mb-3">WEBSITE RESMI DESA</span>
+                  <h1 class="display-6 fw-bold">Selamat Datang di Desa Rantau Kadam</h1>
+                  <p class="opacity-75">Pusat informasi, pelayanan, dan transparansi Pemerintah Desa Rantau Kadam.</p>
+                  <a href="<?= BASE_URL ?>/profil.php" class="btn btn-primary fw-semibold">Jelajahi Profil Desa →</a>
+              </div>
+          </div>
+      </div>
+  </section>
 
     <h2 class="section-title h4 mb-4">Layanan Cepat</h2>
     <div class="row g-3 mb-5">
