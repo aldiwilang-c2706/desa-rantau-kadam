@@ -156,8 +156,12 @@ a {
 }
 
 .footer {
-    background: #0B2E62;
+    background:
+        linear-gradient(rgba(11, 46, 98, .55), rgba(11, 46, 98, .68)),
+        url("../img/desa_rantau_resize.webp") center 40% / cover no-repeat,
+        #0B2E62;
     color: #CBD5E1;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, .45);
 }
 
 .footer a {
@@ -167,6 +171,21 @@ a {
 .page-header {
     background: #fff;
     border-bottom: 1px solid var(--border);
+}
+
+.page-header-photo {
+    background: url("../img/desa_rantau_resize.webp") center 25% / cover no-repeat, var(--primary);
+}
+
+.page-glass {
+    display: inline-block;
+    margin: 0;
+    padding: .5rem 1.25rem;
+    background: rgba(255, 255, 255, .72);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, .6);
+    border-radius: 14px;
 }
 
 .admin-sidebar {
